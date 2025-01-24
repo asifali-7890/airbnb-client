@@ -18,12 +18,13 @@ const PlaceDetails = () => {
     const [checkOut, setCheckOut] = useState('');
     const [maxGuests, setMaxGuests] = useState(1);
     const [loading, setLoading] = useState(true);
+    const [loading1, setLoading1] = useState(false);
     const [price, setPrice] = useState(''); // New price state
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault(); // Prevent form from refreshing the page
-
+        setLoading1(true);
         const placeData = {
             id,
             title,
@@ -49,7 +50,7 @@ const PlaceDetails = () => {
             });
 
             if (response.ok) {
-                alert('Place saved successfully!');
+                // alert('Place saved successfully!');
                 // Redirect to /account/places
                 location.href = '/account/places'; // Redirect after successful submission
                 navigate('/account/places');
@@ -59,6 +60,8 @@ const PlaceDetails = () => {
         } catch (error) {
             console.error('Error saving the place:', error);
             alert('An error occurred while saving the place.');
+        } finally {
+            setLoading1(false);
         }
     };
 
@@ -359,9 +362,32 @@ const PlaceDetails = () => {
 
                 <button
                     type="submit"
-                    className="mt-4 bg-blue-500 text-white py-2 px-6 rounded-lg w-full"
+                    className="mt-4 bg-blue-500 flex justify-center items-center text-white py-2 px-6 rounded-lg w-full"
                 >
-                    Save
+                    {loading1 ? (
+                        <svg
+                            className="animate-spin h-5 w-5 text-white"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                        >
+                            <circle
+                                className="opacity-25"
+                                cx="12"
+                                cy="12"
+                                r="10"
+                                stroke="currentColor"
+                                strokeWidth="4"
+                            ></circle>
+                            <path
+                                className="opacity-75"
+                                fill="currentColor"
+                                d="M4 12a8 8 0 018-8v8H4z"
+                            ></path>
+                        </svg>
+                    ) : (
+                        'Save'
+                    )}
                 </button>
             </form> </div>
     )
