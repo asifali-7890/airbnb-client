@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { differenceInCalendarDays } from "date-fns";
 import axios from "axios";
 import { UserContext } from "./UserContext.jsx";
+import { useNavigate } from 'react-router-dom';
 
 // eslint-disable-next-line react/prop-types
 export default function BookingWidget({ place }) {
