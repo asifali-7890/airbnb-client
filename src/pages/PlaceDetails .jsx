@@ -40,7 +40,7 @@ const PlaceDetails = () => {
         };
 
         try {
-            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/${id}`, {
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}places/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -114,7 +114,7 @@ const PlaceDetails = () => {
 
     useEffect(() => {
         // Fetch the place details using the id from the URL
-        axios.get(`${import.meta.env.VITE_API_BASE_URL}/places/${id}`)
+        axios.get(`${import.meta.env.VITE_API_BASE_URL}places/${id}`)
             .then(response => {
                 const place = response.data;
                 // Set the data to corresponding state variables

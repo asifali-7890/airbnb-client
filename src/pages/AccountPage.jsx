@@ -9,6 +9,7 @@ import SinglePage from "./SinglePage.jsx";
 export default function AccountPage() {
     const { ready, user, setUser } = useContext(UserContext);
     const [redirect, setRedirect] = useState(null);
+    const [loading, setLoading] = useState(false);
     axios.defaults.withCredentials = true;
     let { subpage, action } = useParams(); // Get the current subpage from the URL
 
@@ -17,9 +18,16 @@ export default function AccountPage() {
     }
 
     async function logout() {
-        await axios.post('/logout');
-        setRedirect('/');
-        setUser(null);
+        setLoading(true); // Show the spinner
+        try {
+            await axios.post('/logout');
+            setRedirect('/');
+            setUser(null);
+        } catch (error) {
+            console.error("Error during logout:", error);
+        } finally {
+            setLoading(false); // Hide the spinner
+        }
     }
 
 
@@ -99,8 +107,34 @@ export default function AccountPage() {
             {subpage === 'profile' && (
                 <div className="text-center max-w-lg mx-auto">
                     Logged in as <strong>{user.name}</strong> ({user.email}). <br />
-                    <button onClick={logout} className="w-full bg-red-500 text-white rounded-full mt-2 py-2 px-4">
-                        Logout
+                    <button
+                        onClick={logout}
+                        className="w-full bg-red-500  flex justify-center items-center text-white rounded-full mt-2 py-2 px-4"
+                    >
+                        {loading ? (
+                            <svg
+                                className="animate-spin h-5 w-5 text-white"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                            >
+                                <circle
+                                    className="opacity-25"
+                                    cx="12"
+                                    cy="12"
+                                    r="10"
+                                    stroke="currentColor"
+                                    strokeWidth="4"
+                                ></circle>
+                                <path
+                                    className="opacity-75"
+                                    fill="currentColor"
+                                    d="M4 12a8 8 0 018-8v8H4z"
+                                ></path>
+                            </svg>
+                        ) : (
+                            'Logout'
+                        )}
                     </button>
                 </div>
             )}
