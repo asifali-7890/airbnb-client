@@ -9,6 +9,7 @@ export default function UserContextProvider({ children }) {
     const [ready, setReady] = useState(false);
 
     // console.log('import.meta.env.VITE_API_BASE_URL', import.meta.env.VITE_API_BASE_URL);
+    // axios.defaults.withCredentials = true;
 
     useEffect(() => {
         axios.get('/profile', { withCredentials: true })
