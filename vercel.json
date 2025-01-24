@@ -21,12 +21,8 @@
     ],
     "rewrites": [
         {
-            "source": "/account/:path*",
-            "destination": "/"
-        },
-        {
-            "source": "/:path*",
-            "destination": "/"
+            "source": "/.*",
+            "destination": "/index.html"
         }
     ]
 }
