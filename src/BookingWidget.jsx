@@ -11,6 +11,7 @@ export default function BookingWidget({ place }) {
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
     const { user } = useContext(UserContext);
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (user) {
@@ -30,7 +31,8 @@ export default function BookingWidget({ place }) {
             price: numberOfNights * place.price,
         });
         const bookingId = response.data._id;
-        location.href = `/account/bookings/${bookingId}`;
+        // location.href = `/account/bookings/${bookingId}`;
+        navigate(`/account/bookings/${bookingId}`);
     }
 
     const handleSubmit = (event) => {

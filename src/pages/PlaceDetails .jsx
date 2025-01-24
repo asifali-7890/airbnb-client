@@ -18,6 +18,7 @@ const PlaceDetails = () => {
     const [maxGuests, setMaxGuests] = useState(1);
     const [loading, setLoading] = useState(true);
     const [price, setPrice] = useState(''); // New price state
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault(); // Prevent form from refreshing the page
@@ -50,6 +51,7 @@ const PlaceDetails = () => {
                 alert('Place saved successfully!');
                 // Redirect to /account/places
                 location.href = '/account/places'; // Redirect after successful submission
+                navigate('/account/places');
             } else {
                 alert('Failed to save the place.');
             }

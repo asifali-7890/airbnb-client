@@ -8,6 +8,7 @@ const RegisterPage = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
     // Handle form submission
     const handleSubmit = async (event) => {
@@ -22,7 +23,8 @@ const RegisterPage = () => {
             });
 
             // Log the response data to the console
-            location.href = '/login';
+            // location.href = '/login';
+            navigate('/login');
             alert('Registration successful. Now you can log in');
             // console.log('Response data:', response.data);
         } catch (error) {

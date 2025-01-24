@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 const PlacesPage = () => {
     const { action } = useParams();
@@ -18,6 +18,7 @@ const PlacesPage = () => {
     const [price, setPrice] = useState(''); // New price state
 
     axios.defaults.withCredentials = true;
+    const navigate = useNavigate();
 
     // Add photo via link
     const addPhotoByLink = async (e) => {
@@ -96,7 +97,8 @@ const PlacesPage = () => {
             if (response.ok) {
                 alert('Place saved successfully!');
                 // Redirect to /account/places
-                location.href = '/account/places'; // Redirect after successful submission
+                // location.href = '/account/places'; // Redirect after successful submission
+                navigate('/account/places');
             } else {
                 alert('Failed to save the place.');
             }
