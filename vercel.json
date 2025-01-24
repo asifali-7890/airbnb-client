@@ -23,6 +23,10 @@
         {
             "source": "/account/:path*",
             "destination": "/"
+        },
+        {
+            "source": "/:path*",
+            "destination": "/"
         }
     ]
 }
